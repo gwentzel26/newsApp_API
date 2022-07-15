@@ -1,103 +1,42 @@
 {
- 
   "name": "newsapp_api",
- 
   "description": "",
- 
   "version": "1.0.0",
- 
   "main": "index.js",
- 
   "dependencies": {
- 
-   
-  "add": "^2.0.6",
- 
-   
-  "bcrypt": "^5.0.1",
- 
-   
-  "cors": "^2.8.5",
- 
-   
-  "dotenv": "^16.0.1",
- 
-   
-  "ejs": "^3.1.8",
- 
-   
-  "email-templates": "^10.0.0",
- 
-   
-  "express": "^4.18.1",
- 
-   
-  "express-paginate": "^1.0.2",
- 
-   
-  "express-validator": "^6.14.2",
- 
-   
-  "jsonwebtoken": "^8.5.1",
- 
-   
-  "mongoose": "^6.4.4",
- 
-   
-  "mongoose-unique-validator": "^3.1.0",
- 
-   
-  "multer": "^1.4.5-lts.1",
- 
-   
-  "nodemailer": "^6.7.7",
- 
-   
-  "passport": "^0.6.0",
- 
-   
-  "passport-jwt": "^4.0.0",
- 
-   
-  "swagger-autogen": "^2.21.5",
- 
-   
-  "swagger-ui-express": "^4.5.0",
- 
-   
-  "yarn": "^1.22.19"
- 
+    "add": "^2.0.6",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "email-templates": "^10.0.0",
+    "express": "^4.18.1",
+    "express-paginate": "^1.0.2",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.4",
+    "mongoose-unique-validator": "^3.1.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.7.7",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
+    "swagger-autogen": "^2.21.5",
+    "swagger-ui-express": "^4.5.0",
+    "yarn": "^1.22.19"
   },
- 
   "scripts": {
- 
-   
-  "test": "echo \"Error: no test specified\" && exit 1"
- 
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
- 
   "repository": {
- 
-   
-  "type": "git",
- 
-   
-  "url": "git+https://github.com/gwentzel26/newsApp_API.git"
- 
+    "type": "git",
+    "url": "git+https://github.com/gwentzel26/newsApp_API.git"
   },
- 
   "keywords": [],
- 
   "author": "",
- 
   "license": "ISC",
- 
   "bugs": {
- 
-   
-  "url": "https://github.com/gwentzel26/newsApp_API/issues"
- 
+    "url": "https://github.com/gwentzel26/newsApp_API/issues"
   },
- 
   "homepage": "https://github.com/gwentzel26/newsApp_API#readme"
 }
