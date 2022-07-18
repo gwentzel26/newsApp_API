@@ -35,6 +35,102 @@ const register = async (data, role, res) => {
     }
 };
 
+const login = async (data, res) => {
+    try {
+        let { email, password} = data;
+    const user = await User.findOne({email});
+    if(!user) {
+        res.status(404).json({
+            message: "Email login attempt failed",
+            email: "Incorrect email",
+            success: false,
+        })
+    } else {
+        let isMatch = await bcrypt.compare(password, user.password);
+        if(isMatch === true) {
+            let token = jwt.sign({
+                user_id: user._id,
+                role: user.role,
+                email: user.email,
+                username: user.username,
+            },
+            process.env.JWT_SECRET, {
+                expiresIn: "7 days",
+            });
+            let profile = {
+                email: user.email,
+                role: user.role,
+                username: user.username,
+            };
+            let result = {
+                user: profile,
+                token: token,
+                expiresIn: 168,
+            };
+            return res.status(200).json({
+                ...result,
+                message: "Login successful",
+                success: true
+            });
+
+        } else {
+            return res.status(403).json({
+                message: "Failed login attempt",
+                email: "Incorrect password",
+                success: false
+            })
+        }
+    }
+    } catch(err) {
+        return res.status(500).json({
+            message: err.message,
+            success: false
+        })
+    }
+    
+};
+
+const verifyEmail = async (data, res) => {
+    try {
+
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message,
+            success: false
+        })
+    }
+};
+const forgotPassword = async (data, res) => {
+    try {
+
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message,
+            success: false
+        })
+    }
+};
+const resetPassword = async (data, res) => {
+    try {
+
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message,
+            success: false
+        })
+    }
+};
+const changePassword = async (data, res) => {
+    try {
+
+    } catch (err) {
+        return res.status(500).json({
+            message: err.message,
+            success: false
+        })
+    }
+};
+
 const validateEmail = async(email) => {
     let user = await User.findOne({email: email});
     if(user) {
