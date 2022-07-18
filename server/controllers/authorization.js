@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+const crypto = require("crypto");
 import User from "../models/user";
 
 const register = async (data, role, res) => {
@@ -13,13 +14,24 @@ const register = async (data, role, res) => {
         })
     } 
     const hashedPassword = await bcrypt.hash(data.password, 16);
+    const code = crypto.randomInt(100000, 1000000);
     const newUser = new User({
         ...data,
         password: hashedPassword,
+        verificationCode: code,
         role
+    }); 
+
+    await newUser.save();
+    return res.status(201).json({
+        message: "Account successfully created",
+        success: true,
     });
      } catch(err){
-        console.log(err);
+        return res.status(500).json({
+           message: err.message,
+           success: false,
+        })
     }
 };
 
@@ -30,6 +42,6 @@ const validateEmail = async(email) => {
 
     } else {
         return false;
-
+ 
     }
 };

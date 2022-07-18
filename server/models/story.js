@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-
+const uniqueValidator = require("mongoose-unique-validator"); 
 
 const storySchema = new Schema(
     {
@@ -41,4 +41,5 @@ const storySchema = new Schema(
     {timestamps: true}
 );
 
+storySchema.plugin(uniqueValidator);
 module.exports = model("Story", storySchema);

@@ -8,8 +8,8 @@ const videoSchema = new Schema(
             required: true,
         },
         title: {
-            type: Schema.Types.ObjectId,
-            ref: "Story",
+            type: String,
+            required: true,
         },
         createdBy: {
             type: Schema.Types.ObjectId,
