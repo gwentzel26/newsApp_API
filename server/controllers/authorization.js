@@ -129,7 +129,6 @@ const forgotPassword = async (data, res) => {
                 success: false
             })
         }
-
         const code = crypto.randomInt(100000, 1000000);
         const passwordResetCode =  await bcrypt.hash(code.toString(), 16);
         await user.update({passwordResetCode : passwordResetCode});
@@ -146,7 +145,28 @@ const forgotPassword = async (data, res) => {
 };
 const resetPassword = async (data, res) => {
     try {
-
+        let { email, code, newPassword } = data;
+        const user = await User.findOne({email: email});
+        if(!user) {
+           return res.status(404).json({
+               message: "Invalid email",
+               success: false
+           })
+       }
+       let isMatch = await bcrypt.compare(code.toString(), user.resetPassword);
+       if(isMatch === true) {
+        const hashedPassword = await bcrypt.hash(newPassword, 16);
+        await user.update({password: hashedPassword, passwordResetCode: ""}); 
+        return res.status(201).json({
+            message: "Your password has been successfully reset",
+            success: true
+       })
+        } else {
+            return res.status(404).json({
+                message: "Invalid code",
+                success: false
+            })
+        }
     } catch (err) {
         return res.status(500).json({
             message: err.message,
@@ -156,7 +176,22 @@ const resetPassword = async (data, res) => {
 };
 const changePassword = async (data, res) => {
     try {
-
+        let { oldPassword, newPassword } = data;
+        const user = await User.findById(req.user._id);
+        let isMatch = await bcrypt.compare(oldPassword, user.password);
+        if(isMatch) {
+            const hashedPassword = await bcrypt.hash(newPassword, 16);
+            await user.update({password: hashedPassword});
+            return res.status(201).json({
+                message: "Your password has been successfully changed",
+                success: true
+           })
+        } else {
+            return res.status(404).json({
+                message: "Your old password is incorrect",
+                success: false
+            })
+        }
     } catch (err) {
         return res.status(500).json({
             message: err.message,
