@@ -210,3 +210,12 @@ const validateEmail = async(email) => {
  
     }
 };
+
+module.exports = {
+    login, 
+    register,
+    verifyEmail,
+    forgotPassword,
+    resetPassword,
+    changePassword 
+};
