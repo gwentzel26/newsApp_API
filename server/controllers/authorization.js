@@ -92,7 +92,26 @@ const login = async (data, res) => {
 
 const verifyEmail = async (data, res) => {
     try {
-
+        let { code } = data;
+        const user = await User.findOne({ verificationCode: code });
+        if(!user) {
+            return res.status(404).json({
+                message: "Invalid code",
+                success: false
+            })
+        } else if (user.isEmailVerified) {
+            return res.status(404).json({
+                message: "Email already verified",
+                success: false
+            })
+            
+        } else {
+            await user.update ({isEmailVerified: true});
+            return res.status(404).json({
+                message: "Email verification successful",
+                success: true
+            })
+        }
     } catch (err) {
         return res.status(500).json({
             message: err.message,
@@ -102,7 +121,22 @@ const verifyEmail = async (data, res) => {
 };
 const forgotPassword = async (data, res) => {
     try {
+        let { email } = data;
+         const user = await User.findOne({email: email});
+         if(!user) {
+            return res.status(404).json({
+                message: "Invalid email",
+                success: false
+            })
+        }
 
+        const code = crypto.randomInt(100000, 1000000);
+        const passwordResetCode =  await bcrypt.hash(code.toString(), 16);
+        await user.update({passwordResetCode : passwordResetCode});
+        return res.status(404).json({
+            message: "Verification code sent to your email",
+            success: true
+        })
     } catch (err) {
         return res.status(500).json({
             message: err.message,
