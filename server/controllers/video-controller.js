@@ -1,17 +1,15 @@
-import Story from ("../models/story");
+import Video from ("../models/video");
 const paginate = require("express-paginate");
-import Comment from ("../models/comment");
 
-const addStory = async(req, res) => {
+const addVideo = async(req, res) => {
     try{
-        const newSto = new Story({
+        const newSto = new Video({
             ...req.body,
             createdBy: req.user._id,
-
         });
         await newSto.save();
         return res.status(201).json({
-            message: "New Story Added",
+            message: "New Video Added",
             success: true
         })
     } catch(err) {
@@ -22,9 +20,9 @@ const addStory = async(req, res) => {
     }
 }
 
-const deleteStory = async(req, res) => {
+const deleteVideo = async(req, res) => {
     try{
-        const deleteOne = await Story.findByIdAndDelete(req.params.id);
+        const deleteOne = await Video.findByIdAndDelete(req.params.id);
         if(!deleteOne) {
             return res.status(404).json({
                 message: "Id not found",
@@ -32,7 +30,7 @@ const deleteStory = async(req, res) => {
             })
         } else {
             return res.status(204).json({
-                message: "Story successfully deleted",
+                message: "Video successfully deleted",
                 success: true
             })
         }
@@ -44,11 +42,11 @@ const deleteStory = async(req, res) => {
     }
 }
 
-const updateStory = async(req, res) => {
+const updateVideo = async(req, res) => {
     try{
-        await Story.findByIdAndUpdate(req.params.id, req.body);
+        await Video.findByIdAndUpdate(req.params.id, req.body);
         return res.status(201).json({
-            message: "Story successfully updated",
+            message: "Video successfully updated",
             success: true
         })
     } catch(err) {
@@ -63,15 +61,13 @@ const getAll = async(req, res) => {
     try{
         const [results, itemCount] = await 
         Promise.all([
-            Story.find({})
-            .populate("category", "title")
+            Video.find({})
                 .sort({createdAt: -1})
                 .limit(req.query.limit)
                 .skip(req.skip)
                 .lean()
                 .exec(),
-                Story.count({}),
-                
+                Video.count({}),   
         ]);
         const pageCount = Math.ceiling(itemCount/ req.query.limit);
         return res.status(201).json({
@@ -90,13 +86,13 @@ const getAll = async(req, res) => {
     }
 }
 
-const getStory = async(req, res) => {
+const getVideo = async(req, res) => {
     try{
-        let item = await Story.findByIdAndUpdate(req.params.id, {
+        let item = await Video.findByIdAndUpdate(req.params.id, {
             $inc: {viewsCount: 1},
-        }).populate("category", "title");
+        })
         if(item) {
-            item.comments = await Comment.find({story: item._id});
+            
             return res.status(200).json(item)
         } else {
             return res.status(404).json({
@@ -113,11 +109,10 @@ const getStory = async(req, res) => {
 }
 
 
-const getTopStories = async(req, res) => {
+const getTopVideos = async(req, res) => {
     try{
         let result = await 
-            Story.find({})
-            .populate("category", "title")
+            Video.find({})
                 .sort({viewsCount: -1})
                 .limit(3)
                 .lean()
@@ -134,33 +129,11 @@ const getTopStories = async(req, res) => {
     }
 }
 
-const getStoryBySlug = async(req, res) => {
-    try{
-        let item = await Story.findByIdAndUpdate(req.params.slug, {
-            $inc: {viewsCount: 1},
-        }).populate("category", "title");
-        if(item) {
-            item.comments = await Comment.find({story: item._id});
-            return res.status(200).json(item)
-        } else {
-            return res.status(404).json({
-                message: "Id not found",
-                success: false 
-            })
-        }
-    } catch(err) {
-        return res.status(500).json({
-            message: err.message,
-            success: false,
-         })
-    }
-}
 module.exports = {
-    addStory,
-    deleteStory,
-    updateStory,
+    addVideo,
+    deleteVideo,
+    updateVideo,
     getAll,
-    getStory,
-    getTopStories,
-    getStoryBySlug
+    getVideo,
+    getTopVideos,
 }
