@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-
+const uniqueValidator = require("mongoose-unique-validator"); 
 
 const categorySchema = new Schema(
     {
@@ -15,5 +15,5 @@ const categorySchema = new Schema(
     },
     {timestamps: true}
 );
-
+categorySchema.plugin(uniqueValidator);
 module.exports = model("Category", categorySchema);

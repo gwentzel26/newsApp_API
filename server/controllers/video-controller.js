@@ -3,11 +3,11 @@ const paginate = require("express-paginate");
 
 const addVideo = async(req, res) => {
     try{
-        const newSto = new Video({
+        const newVid = new Video({
             ...req.body,
             createdBy: req.user._id,
         });
-        await newSto.save();
+        await newVid.save();
         return res.status(201).json({
             message: "New Video Added",
             success: true

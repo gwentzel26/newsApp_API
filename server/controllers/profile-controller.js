@@ -35,8 +35,6 @@ const getUser = async(req, res) => {
 }
 
 module.exports = {
-       
     updateUser,
-  
     getUser,
 }
