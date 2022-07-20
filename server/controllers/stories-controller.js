@@ -113,10 +113,54 @@ const getStory = async(req, res) => {
 }
 
 
+const getTopStories = async(req, res) => {
+    try{
+        let result = await 
+            Story.find({})
+            .populate("category", "title")
+                .sort({viewsCount: -1})
+                .limit(3)
+                .lean()
+                .exec()
+                
+        return res.status(201).json({
+            data: result,
+        })
+    } catch(err) {
+        return res.status(500).json({
+            message: err.message,
+            success: false,
+         })
+    }
+}
+
+const getStoryBySlug = async(req, res) => {
+    try{
+        let item = await Story.findByIdAndUpdate(req.params.slug, {
+            $inc: {viewsCount: 1},
+        }).populate("category", "title");
+        if(item) {
+            item.comments = await Comment.find({story: item._id});
+            return res.status(200).json(item)
+        } else {
+            return res.status(404).json({
+                message: "Id not found",
+                success: false 
+            })
+        }
+    } catch(err) {
+        return res.status(500).json({
+            message: err.message,
+            success: false,
+         })
+    }
+}
 module.exports = {
     addStory,
     deleteStory,
     updateStory,
     getAll,
-    getStory
+    getStory,
+    getTopStories,
+    getStoryBySlug
 }
