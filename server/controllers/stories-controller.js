@@ -1,5 +1,6 @@
 import Story from ("../models/story");
 const paginate = require("express-paginate");
+import Comment from ("../models/comment");
 
 const addStory = async(req, res) => {
     try{
@@ -91,15 +92,16 @@ const getAll = async(req, res) => {
 
 const getStory = async(req, res) => {
     try{
-        let getSto = await Story.findByIdAndUpdate(req.params.id, {
+        let item = await Story.findByIdAndUpdate(req.params.id, {
             $inc: {viewsCount: 1},
-        }).populate("category", "title")
-        if(getSto) {
-            return res.status(200).json(getSto)
+        }).populate("category", "title");
+        if(item) {
+            item.comments = await Comment.find({story: item._id});
+            return res.status(200).json(item)
         } else {
             return res.status(404).json({
                 message: "Id not found",
-                success: false
+                success: false 
             })
         }
     } catch(err) {
@@ -108,12 +110,13 @@ const getStory = async(req, res) => {
             success: false,
          })
     }
+}
 
-    module.exports = {
-        addStory,
-        deleteStory,
-        updateStory,
-        getAll,
-        getStory
-    }
+
+module.exports = {
+    addStory,
+    deleteStory,
+    updateStory,
+    getAll,
+    getStory
 }
