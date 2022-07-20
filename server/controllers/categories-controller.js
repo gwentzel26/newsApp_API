@@ -106,3 +106,11 @@ const getCategory = async(req, res) => {
          })
     }
 }
+
+module.exports = {
+    addCategory,
+    deleteCategory,
+    updateCategory,
+    getAll,
+    getCategory
+}
