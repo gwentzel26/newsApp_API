@@ -17,7 +17,7 @@ async(req, res) => {
     await addCategory(req, res);
 });
 
-router.put("/categories/:id", ensureAuthenticated, ensureAuthorized(["admin"]), 
+router.put("/categories/update/:id", ensureAuthenticated, ensureAuthorized(["admin"]), 
 async(req, res) => {
     await updateCategory(req, res);
 });
@@ -27,7 +27,7 @@ async(req, res) => {
     await getCategory(req, res);
 });
 
-router.delete("/categories/:id", ensureAuthenticated, ensureAuthorized(["admin"]), 
+router.delete("/categories/delete/:id", ensureAuthenticated, ensureAuthorized(["admin"]), 
 async(req, res) => {
     await deleteCategory(req, res);
 });
