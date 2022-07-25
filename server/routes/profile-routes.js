@@ -13,6 +13,4 @@ async(req, res) => {
     await getUser(req, res);
 });
 
-
-
 module.exports = router;
