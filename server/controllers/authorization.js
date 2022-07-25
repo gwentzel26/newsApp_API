@@ -1,7 +1,7 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+const bcrypt = require('bcryptjs') ;
+const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-import User from "../models/user";
+const User = require("../models/user");
 
 const register = async (data, role, res) => {
     try{
