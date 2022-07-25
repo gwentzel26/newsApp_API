@@ -1,4 +1,4 @@
-const router = require("express").router;
+const router = require("express").Router();
 const { ensureAuthenticated, ensureAuthorized } = require("../middleware/auth-middleware");
 const { getAll, getAdmin } = require("../controllers/admin");
 const register = require("../controllers/authorization")

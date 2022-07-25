@@ -1,4 +1,4 @@
-const router = require("express").router;
+const router = require("express").Router();
 const { ensureAuthenticated } = require("../middleware/auth-middleware");
 const {    updateUser,
     getUser, } = require("../controllers/profile-controller");
