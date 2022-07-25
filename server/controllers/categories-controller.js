@@ -1,4 +1,4 @@
-import Category from ("../models/category");
+const Category = require("../models/category");
 const paginate = require("express-paginate");
 
 const addCategory = async(req, res) => {

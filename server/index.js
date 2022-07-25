@@ -6,12 +6,13 @@ const passport = require("passport");
 const {connect} = require("mongoose");
 
 const app = express();
-const router = require("./server/routes/index");
+const router = require("./routes/index");
 
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 app.use(passport.initialize());
-app.use("./middleware/passport-middleware.js")(passport);
+require("./middleware/passport-middleware.js")(passport);
 app.use(paginate.middleware(process.env.LIMIT, process.env.MAX_LIMIT));
 app.use(router);
 

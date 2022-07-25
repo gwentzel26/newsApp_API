@@ -1,4 +1,4 @@
-import User from ("../models/user");
+const User = require("../models/user");
 const paginate = require("express-paginate");
 
 const getAll = async(req, res) => {

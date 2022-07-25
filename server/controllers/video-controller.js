@@ -1,4 +1,4 @@
-import Video from ("../models/video");
+const Video = require("../models/video");
 const paginate = require("express-paginate");
 
 const addVideo = async(req, res) => {
@@ -116,7 +116,7 @@ const getTopVideos = async(req, res) => {
                 .sort({viewsCount: -1})
                 .limit(3)
                 .lean()
-                .exec()
+                .exec();
                 
         return res.status(201).json({
             data: result,

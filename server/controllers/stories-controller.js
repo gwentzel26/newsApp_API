@@ -1,6 +1,6 @@
-import Story from ("../models/story");
+const Story = require("../models/story");
 const paginate = require("express-paginate");
-import Comment from ("../models/comment");
+const Comment = require("../models/comment");
 
 const addStory = async(req, res) => {
     try{
@@ -121,7 +121,7 @@ const getTopStories = async(req, res) => {
                 .sort({viewsCount: -1})
                 .limit(3)
                 .lean()
-                .exec()
+                .exec();
                 
         return res.status(201).json({
             data: result,
