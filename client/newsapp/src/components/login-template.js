@@ -12,7 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default class Login extends Component {
     render(){
         return(
-        <div className="card" style={{width: "40%"}}>
+        <div className="card" style={{width: "30%", height: "40%"}}>
             <input type="text" className="email" placeholder="email"></input>
             <input type="text" className="password" placeholder="password"></input>
             <button className="loginBtn" style={{width: "85%"}} >Login</button>
