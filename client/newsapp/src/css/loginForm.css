@@ -1,13 +1,48 @@
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 .card {
    display: flex;
-   align-items: center;
+   /* align-items: center; */
    justify-content: center;
-   margin-top: 40vh;
+   /* margin-left: 60%; */
+   margin-top: 10vh;
+   position: relative;
+   justify-content: space-evenly;
+   border: 2px solid black !important;
+   border-radius: 25px !important;
+   background-color: rgb(248, 240, 234) !important;
 }
+
+.credentials {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: flex-start;
+    background-color: rgb(248, 240, 234) !important;
+}
+
+.loginLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(248, 240, 234) !important;
+}
+.email {
+    margin-bottom: 2vh;
+    width: 40%;
+    margin-right: 2vh;
+}
+.password {
+    margin-bottom: 2vh;
+    width: 40%;
+}
+
 .fgtPswdCont {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgb(248, 240, 234) !important;
 
 }
 .fgtPswd {
@@ -15,7 +50,19 @@
     color: rgb(8, 83, 204);
     font-weight: bold;
     text-align: center;
+    margin-top: 2vh;
+    background-color: rgb(248, 240, 234) !important;
 }
+
+.registerBtn {
+    align-items: end;
+    width: 50%;
+    margin-top: 2vh;
+    margin-bottom: -2vh;
+    background-color: rgb(210, 98, 98);
+}
+
+
 
 .hover-underline-animation {
     display: inline-block;
