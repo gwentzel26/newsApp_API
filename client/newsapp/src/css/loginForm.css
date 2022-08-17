@@ -54,9 +54,12 @@
     background-color: rgb(248, 240, 234) !important;
 }
 
+.registerLink{
+    background-color: rgb(248, 240, 234) ;
+}
 .registerBtn {
     align-items: end;
-    width: 50%;
+    width: 100%;
     margin-top: 2vh;
     margin-bottom: -2vh;
     background-color: rgb(210, 98, 98);

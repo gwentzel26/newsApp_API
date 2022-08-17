@@ -8,17 +8,21 @@ body {
 }
 
 h2 {
-    margin-left: 20%;
+    margin-left: 10%;
     margin-top: 60vh;
+    font-size: 80px !important;
 
 }
 .loginHeader {
     display: flex;
     margin-top: 30vh;
     justify-content: space-evenly;
+    
 
     /* align-content: center; */
 }
 .appDescrip {
+    margin-left: -10%;
     margin-bottom: 0%;
+    font-size: 20px;
 }

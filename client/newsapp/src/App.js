@@ -1,8 +1,9 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import logo from './logo.svg';
-import './App.css';
-import Login from './components/login-template';
+import './css/App.css';
+import LoginPage from './pages/login';
+import RegisterPage from './pages/register';
 
 function App() {
   return (
@@ -11,14 +12,14 @@ function App() {
     
     {/* <Navbar /> */}
     
-    <div className='container'>
+    
     <Routes> 
-        <Route path='/' element = {<Login/>} />
-        {/* <Route path='/edit/:id' element = {<EditExercise/>} />
-        <Route path='/create' element = {<CreateExercise/>} />
-        <Route path='/user' element = {<CreateUser/>} /> */}
+        <Route path='/' element = {<LoginPage/>} />
+        <Route path='/register' element = {<RegisterPage/>} />
+        {/* <Route path='/create' element = {<CreateExercise/>} />
+        <Route path='/user' element = {<CreateUser/>} /> */ }
     </Routes> 
-    </div>
+    
     </BrowserRouter>
     </>
   );

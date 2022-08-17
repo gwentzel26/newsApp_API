@@ -155,6 +155,10 @@ const getStoryBySlug = async(req, res) => {
          })
     }
 }
+
+// const generateSlug = (title) => {
+//     const slugText = title.toString()
+// }
 module.exports = {
     addStory,
     deleteStory,
